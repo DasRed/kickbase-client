@@ -3,25 +3,28 @@ import Client from '../Client.js';
 import Model from './Model.js';
 import PlayerStats from './PlayerStats.js';
 
+export const DAY_STATUS         = {
+    NOT_LINE_UP: 0,
+    LINE_UP:     1,
+};
+
+export const MARKET_VALUR_TREND = {
+    NONE: 0,
+    UP:   1,
+    DOWN: 2,
+};
+
+export const STATUS             = {
+    FIT:               0,
+    INJURED:           1, // verletzt
+    STRUCK:            2, // angeschlagen
+    UNKNOWN_3:         3, // ???
+    ADVANCED_TRAINING: 4, // Aufbautraining
+};
+
 export default class Player extends Model {
     /** @type {PlayerStats} */
     #stats;
-    static DAY_STATUS         = {
-        NOT_LINE_UP: 0,
-        LINE_UP:     1,
-    };
-    static MARKET_VALUR_TREND = {
-        NONE: 0,
-        UP:   1,
-        DOWN: 2,
-    };
-    static STATUS             = {
-        FIT:               0,
-        INJURED:           1, // verletzt
-        STRUCK:            2, // angeschlagen
-        UNKNOWN_3:         3, // ???
-        ADVANCED_TRAINING: 4, // Aufbautraining
-    };
 
     /**
      *
@@ -68,7 +71,7 @@ export default class Player extends Model {
         this.price            = price;
 
         this.isInSell = this.price !== undefined;
-        this.isLineUp = this.dayStatus === Player.DAY_STATUS.LINE_UP;
+        this.isLineUp = this.dayStatus === DAY_STATUS.LINE_UP;
     }
 
     /** @returns {Promise<{}>} */

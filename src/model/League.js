@@ -1,5 +1,6 @@
 //noinspection ES6UnusedImports
 import Client from '../Client.js';
+import LeagueUser from './LeagueUser.js';
 import MarketPlayer from './MarketPlayer.js';
 import Model from './Model.js';
 import Player from './Player.js';
@@ -31,11 +32,6 @@ export default class League extends Model {
         this.values    = values;
     }
 
-    /** @returns {Promise<number>} */
-    async getBudget() {
-        return (await this.getMe()).budget;
-    }
-
     /** @returns {Promise<MarketPlayer[]>} */
     async getMarketPlayers() {
         const data = await this.client.get(`/leagues/${this.id}/market`);
@@ -43,9 +39,9 @@ export default class League extends Model {
         return data.players.map((marketPlayer) => new MarketPlayer(this.client, this, marketPlayer));
     }
 
-    /** @returns {Promise<{budget: number, teamValue: number, placement: number, points: number}>} */
-    getMe() {
-        return this.client.get(`/leagues/${this.id}/me`);
+    /** @returns {Promise<LeagueUser>} */
+    async getMe() {
+        return new LeagueUser(this.client, await this.client.get(`/leagues/${this.id}/me`));
     }
 
     /** @returns {Promise<Player[]>} */
@@ -53,10 +49,5 @@ export default class League extends Model {
         const data = await this.client.get(`/leagues/${this.id}/users/${this.user.id}/players`);
 
         return data.players.map((player) => new Player(this.client, this, player));
-    }
-
-    /** @returns {Promise<number>} */
-    async getTeamValue() {
-        return (await this.getMe()).teamValue;
     }
 }
