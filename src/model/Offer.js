@@ -32,7 +32,7 @@ export default class Offer extends Model {
     }
 
     /** @returns {Promise<boolean>} */
-    async acceptOffer() {
+    async accept() {
         try {
             await this.client.post(`/leagues/${this.marketPlayer.league.id}/market/${this.marketPlayer.id}/offers/${this.id}/accept`);
             return true;
