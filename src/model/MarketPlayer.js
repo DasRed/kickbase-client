@@ -21,7 +21,7 @@ export default class MarketPlayer extends Player {
         this.price  = price;
         this.date   = moment(date);
         this.expiry = expiry;
-        this.offers = offers?.map((offer) => new Offer(this.client, offer)) ?? [];
+        this.offers = offers?.map((offer) => new Offer(this.client, this, offer)) ?? [];
     }
 
     /** @returns {Offer} */
