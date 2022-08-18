@@ -24,6 +24,6 @@ export default class MarketPlayer extends Player {
 
     /** @returns {Offer} */
     getHighestOffer() {
-        return this.offers.reduce((acc, offer) => acc === undefined || acc.price < offer.price ? offer : acc, undefined)
+        return this.offers.reduce((acc, offer) => acc === undefined || acc.price < offer.price ? offer : acc, undefined);
     }
 }
