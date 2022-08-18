@@ -1,3 +1,5 @@
+//noinspection ES6UnusedImports
+import Client from '../Client.js';
 import Model from './Model.js';
 import PlayerStats from './PlayerStats.js';
 

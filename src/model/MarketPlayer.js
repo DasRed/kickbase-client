@@ -1,4 +1,6 @@
 import moment from 'moment';
+//noinspection ES6UnusedImports
+import Client from '../Client.js';
 import Offer from './Offer.js';
 import Player from './Player.js';
 
@@ -25,5 +27,10 @@ export default class MarketPlayer extends Player {
     /** @returns {Offer} */
     getHighestOffer() {
         return this.offers.reduce((acc, offer) => acc === undefined || acc.price < offer.price ? offer : acc, undefined);
+    }
+
+    /** @returns {Offer} */
+    getMyOffer() {
+        return this.offers.find((offer) => offer.userId === this.client.getUser().id);
     }
 }

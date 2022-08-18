@@ -1,4 +1,6 @@
 import moment from 'moment';
+//noinspection ES6UnusedImports
+import Client from '../Client.js';
 import Model from './Model.js';
 
 export default class PlayerStats extends Model {
@@ -10,6 +12,7 @@ export default class PlayerStats extends Model {
 
         return this._marketValueAtBuyDate || this.buyPrice;
     }
+
     /**
      *
      * @param {Client} client
@@ -26,10 +29,10 @@ export default class PlayerStats extends Model {
     constructor(client, player, {marketValue, marketValues, leaguePlayer, ...values}) {
         super(client, values);
 
-        this.marketValue = marketValue;
+        this.marketValue  = marketValue;
         this.marketValues = marketValues;
 
-        this.buyDate = moment(leaguePlayer.buyDate ?? 0);
+        this.buyDate  = moment(leaguePlayer.buyDate ?? 0);
         this.buyPrice = leaguePlayer.buyPrice ?? 0;
     }
 }
