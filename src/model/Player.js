@@ -29,6 +29,7 @@ export default class Player extends Model {
      * @param {string} teamId
      * @param {string} teamName
      * @param {string} userId
+     * @param {string} username
      * @param {string} firstName
      * @param {string} lastName
      * @param {number} status
