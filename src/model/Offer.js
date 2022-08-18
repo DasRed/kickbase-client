@@ -31,12 +31,8 @@ export default class Offer extends Model {
         this.validUntilDate = moment(validUntilDate);
     }
 
-    /**
-     *
-     * @param {Offer} offer
-     * @returns {Promise<boolean>}
-     */
-    async acceptOffer(offer) {
+    /** @returns {Promise<boolean>} */
+    async acceptOffer() {
         try {
             await this.client.post(`/leagues/${this.marketPlayer.league.id}/market/${this.marketPlayer.id}/offers/${this.id}/accept`);
             return true;
