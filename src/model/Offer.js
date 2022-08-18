@@ -2,8 +2,6 @@ import moment from 'moment';
 //noinspection ES6UnusedImports
 import MarketPlayer from './MarketPlayer.js';
 import Model from './Model.js';
-//noinspection ES6UnusedImports
-import Offer from './Offer.js';
 
 export default class Offer extends Model {
     /**
