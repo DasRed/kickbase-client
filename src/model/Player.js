@@ -1,6 +1,8 @@
 //noinspection ES6UnusedImports
 import Client from '../Client.js';
 import Model from './Model.js';
+//noinspection ES6UnusedImports
+import Offer from './Offer.js';
 import PlayerStats from './PlayerStats.js';
 
 export const DAY_STATUS = {
@@ -72,6 +74,22 @@ export default class Player extends Model {
 
         this.isInSell = this.price !== undefined;
         this.isLineUp = this.dayStatus === DAY_STATUS.LINE_UP;
+    }
+
+    /**
+     *
+     * @param {Offer} offer
+     * @returns {Promise<boolean>}
+     */
+    async acceptOffer(offer) {
+        try {
+            await this.client.post(`/leagues/${this.league.id}/market/${this.id}/offers/${offer.id}/accept`);
+            return true;
+        }
+        catch (error) {
+            console.error(error);
+            return false;
+        }
     }
 
     /**

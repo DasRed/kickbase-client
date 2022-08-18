@@ -122,7 +122,7 @@ export default class Client {
     /**
      *
      * @param {string} url
-     * @param {object} data
+     * @param {object} [data]
      * @returns {Promise<Object>}
      */
     post(url, data) {
