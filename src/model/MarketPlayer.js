@@ -33,4 +33,19 @@ export default class MarketPlayer extends Player {
     getMyOffer() {
         return this.offers.find((offer) => offer.userId === this.client.getUser().id);
     }
+
+    /**
+     * @param {number} price
+     * @returns {Promise<boolean>}
+     */
+    async placeOffer(price) {
+        try {
+            await this.client.post(`/leagues/${this.league.id}/market/${this.id}/offers`, {price});
+            return true;
+        }
+        catch (error) {
+            console.error(error);
+            return false;
+        }
+    }
 }
