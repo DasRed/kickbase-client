@@ -2,6 +2,8 @@ import Model from './Model.js';
 import PlayerStats from './PlayerStats.js';
 
 export default class Player extends Model {
+    /** @type {PlayerStats} */
+    #stats;
     static DAY_STATUS         = {
         NOT_LINE_UP: 0,
         LINE_UP:     1,
@@ -18,9 +20,6 @@ export default class Player extends Model {
         UNKNOWN_3:         3, // ???
         ADVANCED_TRAINING: 4, // Aufbautraining
     };
-
-    /** @type {PlayerStats} */
-    #stats;
 
     /**
      *
@@ -43,7 +42,7 @@ export default class Player extends Model {
      * @param {number} [price = undefined]
      * @param {Object} values
      */
-    constructor(client, league, {id, teamId, teamName, userId, firstName, lastName, status, position, number, averagePoints, totalPoints, marketValue, marketValueTrend, dayStatus, price = undefined, ...values}) {
+    constructor(client, league, {id, teamId, teamName, userId, username, firstName, lastName, status, position, number, averagePoints, totalPoints, marketValue, marketValueTrend, dayStatus, price = undefined, ...values}) {
         super(client, values);
 
         this.league = league;
@@ -52,6 +51,7 @@ export default class Player extends Model {
         this.teamId           = teamId;
         this.teamName         = teamName;
         this.userId           = userId;
+        this.username         = username;
         this.firstName        = firstName;
         this.lastName         = lastName;
         this.status           = status;
