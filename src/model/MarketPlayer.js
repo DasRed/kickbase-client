@@ -21,4 +21,9 @@ export default class MarketPlayer extends Player {
         this.expiry = expiry;
         this.offers = offers.map((offer) => new Offer(this.client, offer));
     }
+
+    /** @returns {Offer} */
+    getHighestOffer() {
+        return this.offers.reduce((acc, offer) => acc === undefined || acc.price < offer.price ? offer : acc, undefined)
+    }
 }
