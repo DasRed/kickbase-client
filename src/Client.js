@@ -92,6 +92,10 @@ export default class Client {
 
         const response = await fetch(this.host + (url.startsWith('/') ? url : `/${url}`), options);
 
+        if (response.ok === false) {
+            throw new Error(response.status + ' ' + response.statusText + await response.text());
+        }
+
         return await response.json();
     }
 
