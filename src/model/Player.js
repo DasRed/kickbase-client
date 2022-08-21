@@ -22,6 +22,13 @@ export const STATUS = {
     ADVANCED_TRAINING: 4, // Aufbautraining
 };
 
+export const POSITION = {
+    GOALKEEPER: 1,
+    DEFENSE:    2,
+    MIDFIELD:   3,
+    ATTACK:     4,
+};
+
 export default class Player extends Model {
     /** @type {PlayerStats} */
     #stats;
