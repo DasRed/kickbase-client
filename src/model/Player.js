@@ -1,5 +1,3 @@
-//noinspection ES6UnusedImports
-import Client from '../Client.js';
 import Model from './Model.js';
 import PlayerStats from './PlayerStats.js';
 
@@ -35,7 +33,7 @@ export default class Player extends Model {
 
     /**
      *
-     * @param {Client} client
+     * @param {KickbaseManagerClient} client
      * @param {League} league
      * @param {string} id
      * @param {string} teamId

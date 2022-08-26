@@ -1,13 +1,11 @@
 import moment from 'moment';
-//noinspection ES6UnusedImports
-import Client from '../Client.js';
 import Offer from './Offer.js';
 import Player from './Player.js';
 
 export default class MarketPlayer extends Player {
     /**
      *
-     * @param {Client} client
+     * @param {KickbaseManagerClient} client
      * @param {League} league
      * @param {number} price
      * @param {string|moment} date

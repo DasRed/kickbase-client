@@ -3,6 +3,9 @@ import fetch from 'node-fetch';
 import League from './model/League.js';
 import User from './model/User.js';
 
+/**
+ * @alias KickbaseManagerClient
+ */
 export default class Client {
     /** @type {League[]} */
     #leagues = [];

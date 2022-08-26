@@ -3,7 +3,7 @@ import Model from './Model.js';
 export default class User extends Model {
     /**
      *
-     * @param {Client} client
+     * @param {KickbaseManagerClient} client
      * @param {string} email
      * @param {string} cover
      * @param {number} flags

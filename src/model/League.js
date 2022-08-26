@@ -1,5 +1,3 @@
-//noinspection ES6UnusedImports
-import Client from '../Client.js';
 import LeagueUser from './LeagueUser.js';
 import MarketPlayer from './MarketPlayer.js';
 import Model from './Model.js';
@@ -8,7 +6,7 @@ import Player from './Player.js';
 export default class League extends Model {
     /**
      *
-     * @param {Client} client
+     * @param {KickbaseManagerClient} client
      * @param {User} user
      * @param {string} id
      * @param {string} cpi

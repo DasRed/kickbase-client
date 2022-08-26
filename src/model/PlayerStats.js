@@ -1,6 +1,4 @@
 import moment from 'moment';
-//noinspection ES6UnusedImports
-import Client from '../Client.js';
 import Model from './Model.js';
 
 export default class PlayerStats extends Model {
@@ -15,7 +13,7 @@ export default class PlayerStats extends Model {
 
     /**
      *
-     * @param {Client} client
+     * @param {KickbaseManagerClient} client
      * @param {Player} player
      * @param {number} marketValue
      * @param {Object[]} marketValues
