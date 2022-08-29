@@ -21,7 +21,7 @@ steps:
                 path: /tmp/cache
 
     -   name: .npmrc
-        image: alpine
+        image: node:18-alpine
         commands:
             - echo "@dasred:registry=https://npm.pkg.github.com/" > ~/.npmrc
             - echo "//npm.pkg.github.com/:_authToken=\"$GT_TOKEN\"" >> ~/.npmrc
