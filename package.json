@@ -23,7 +23,8 @@
         "semantic-release-cli": "^5.4.4"
     },
     "scripts": {
-        "release": "semantic-release"
+        "prepublishOnly": "npm run semantic-release",
+        "semantic-release": "semantic-release"
     },
     "publishConfig": {
         "access": "restricted",
