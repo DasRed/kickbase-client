@@ -1,14 +1,32 @@
 {
     "name": "kickbase-client",
-    "version": "1.0.0",
+    "version": "0.0.0-development",
     "main": "src/Client.js",
     "type": "module",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/DasRed/kickbase-client.git"
+        "url": "https://github.com/DasRed/kickbase-client.git"
     },
     "dependencies": {
         "moment": "^2.29.4",
         "node-fetch": "^3.2.10"
+    },
+    "files": [
+        "src/*"
+    ],
+    "devDependencies": {
+        "semantic-release-cli": "^5.4.4",
+        "semantic-release": "^19.0.5"
+    },
+    "scripts": {
+        "semantic-release": "semantic-release"
+    },
+    "publishConfig": {
+        "access": "restricted"
+    },
+    "release": {
+        "branches": [
+            "main"
+        ]
     }
 }
