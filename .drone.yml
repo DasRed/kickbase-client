@@ -16,9 +16,9 @@ steps:
             #            archive_format: "gzip"
             mount:
                 - 'node_modules'
-#        volumes:
-#            -   name: cache
-#                path: /tmp/cache
+        volumes:
+            -   name: cache
+                path: /tmp/cache
 
     -   name:  npm install
         image: node:18-alpine
@@ -51,9 +51,9 @@ steps:
             # filesystem_cache_root: "/tmp/cache"
             mount:
                 - 'node_modules'
-#        volumes:
-#            -   name: cache
-#                path: /tmp/cache
+        volumes:
+            -   name: cache
+                path: /tmp/cache
 
 volumes:
     -   name: cache
