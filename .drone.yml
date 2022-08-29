@@ -6,6 +6,13 @@ platform:
   arch: arm64
 
 steps:
+  - name: npm install
+    image: node:18-alpine
+    when:
+      branch:
+        - main
+    commands:
+      - npm ci
   - name: release
     image: node:18-alpine
     when:
