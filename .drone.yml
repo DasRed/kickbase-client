@@ -35,12 +35,12 @@ steps:
                 from_secret: NPM_TOKEN
         commands:
             - apk update && apk upgrade && apk add --no-cache git
-#            - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > .npmrc
-            - echo "@dasred:registry=https://npm.pkg.github.com/" >> .npmrc
+            - echo "@dasred:registry=https://npm.pkg.github.com/" > .npmrc
             - echo "//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}" >> .npmrc
+#            - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> /root/.npmrc
 #            - echo "always-auth=true" >> .npmrc
 #            - npm set @dasred:registry https://npm.pkg.github.com
-            - npm publish --registry=https://npm.pkg.github.com/
+            - npm publish --registry=https://npm.pkg.github.com/ --userconfig=/root/.npmrc
 
     -   name:  rebuild cache
         image: meltwater/drone-cache
