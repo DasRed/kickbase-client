@@ -40,7 +40,9 @@ steps:
 #            - echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" >> /root/.npmrc
 #            - echo "always-auth=true" >> .npmrc
 #            - npm set @dasred:registry https://npm.pkg.github.com
-            - npm publish --registry=https://npm.pkg.github.com/ --userconfig=/root/.npmrc
+#            - npm publish --registry=https://npm.pkg.github.com/ --userconfig=/root/.npmrc
+            - npm adduser --registry=https://npm.pkg.github.com/
+            - npm publish
 
     -   name:  rebuild cache
         image: meltwater/drone-cache
