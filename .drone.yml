@@ -31,7 +31,7 @@ steps:
                 from_secret: NPM_TOKEN
         commands:
             - while true; do sleep 5; done
-            -
+
     -   name:  release
         image: node:18-alpine
         environment:
