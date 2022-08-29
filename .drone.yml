@@ -47,8 +47,6 @@ steps:
                 from_secret: GITHUB_TOKEN
         commands:
             - apk update && apk upgrade && apk add --no-cache git
-#            - npm set registry "https://npm.pkg.github.com/"
-#            - npm set //npm.pkg.github.com/:_authToken $GITHUB_TOKEN
             - npm publish
 
     -   name:  rebuild cache
