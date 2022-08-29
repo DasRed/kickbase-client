@@ -12,8 +12,6 @@ steps:
             pull:    true
             backend: "filesystem"
             restore: true
-            #            cache_key:      "volume"
-            #            archive_format: "gzip"
             mount:
                 - 'node_modules'
         volumes:
@@ -22,9 +20,12 @@ steps:
 
     -   name: .npmrc
         image: node:18-alpine
+        environment:
+            GITHUB_TOKEN:
+                from_secret: GITHUB_TOKEN
         commands:
             - echo "@dasred:registry=https://npm.pkg.github.com/" > ~/.npmrc
-            - echo "//npm.pkg.github.com/:_authToken=\"$GT_TOKEN\"" >> ~/.npmrc
+            - echo "//npm.pkg.github.com/:_authToken=\"$GITHUB_TOKEN\"" >> ~/.npmrc
             - npm set @dasred:registry https://npm.pkg.github.com
 
     -   name:  npm install
@@ -33,16 +34,16 @@ steps:
             branch:
                 - main
         commands:
-            - npm ci
+            - npm i
 
     -   name:  release
         image: node:18-alpine
         when:
             branch:
                 - main
-        environment:
-            GH_TOKEN:
-                from_secret: GH_TOKEN
+#        environment:
+#            GH_TOKEN:
+#                from_secret: GH_TOKEN
         commands:
             - apk update && apk upgrade && apk add --no-cache git
             - npm run semantic-release
@@ -53,9 +54,6 @@ steps:
             pull:    true
             backend: "filesystem"
             rebuild: true
-            #cache_key:      "volume"
-            #archive_format: "gzip"
-            # filesystem_cache_root: "/tmp/cache"
             mount:
                 - 'node_modules'
         volumes:
@@ -65,7 +63,7 @@ steps:
             status:
                 - success
                 - failure
-                -
+
 volumes:
     -   name: cache
         host:
