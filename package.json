@@ -1,6 +1,6 @@
 {
     "name": "@dasred/kickbase-client",
-    "version": "1.1.11",
+    "version": "1.1.12",
     "main": "src/Client.js",
     "type": "module",
     "repository": {
