@@ -20,9 +20,6 @@ steps:
 
     -   name:  npm install
         image: node:18-alpine
-        when:
-            branch:
-                - main
         commands:
             - npm i
 
@@ -36,8 +33,8 @@ steps:
                 from_secret: GITHUB_TOKEN
         commands:
             - apk update && apk upgrade && apk add --no-cache git
-            - echo "@dasred:registry=https://npm.pkg.github.com/" > .npmrc
-            - echo "//npm.pkg.github.com/:_authToken=\"$GITHUB_TOKEN\"" >> .npmrc
+            - echo "@dasred:registry=https://npm.pkg.github.com/" > /root/.npmrc
+            - echo "//npm.pkg.github.com/:_authToken=\"$GITHUB_TOKEN\"" >> /root/.npmrc
             - npm set @dasred:registry https://npm.pkg.github.com
             - npm publish
 
@@ -61,3 +58,7 @@ volumes:
     -   name: cache
         host:
             path: /mnt/datahdd/drone/cache
+
+trigger:
+    event: [push, pull_request]
+    branch: [main]
