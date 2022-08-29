@@ -39,9 +39,7 @@ steps:
             - echo "@dasred:registry=https://npm.pkg.github.com/" > .npmrc
             - echo "//npm.pkg.github.com/:_authToken=\"$GITHUB_TOKEN\"" >> .npmrc
             - npm set @dasred:registry https://npm.pkg.github.com
-            - ls -la .
-            - cat .npmrc
-            - npm run semantic-release
+            - npm publish
 
     -   name:  rebuild cache
         image: meltwater/drone-cache
