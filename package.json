@@ -1,6 +1,6 @@
 {
     "name": "kickbase-client",
-    "version": "0.0.0-development",
+    "version": "1.0.0",
     "main": "src/Client.js",
     "type": "module",
     "repository": {
@@ -24,7 +24,7 @@
     },
     "scripts": {
         "prepublishOnly": "npm run semantic-release",
-        "semantic-release": "semantic-release"
+        "semantic-release": "semantic-release --no-ci"
     },
     "publishConfig": {
         "access": "restricted"
