@@ -31,8 +31,10 @@ steps:
                 from_secret: NPM_TOKEN
         commands:
             - apk update && apk upgrade && apk add --no-cache git
-            - echo "@dasred:registry=https://npm.pkg.github.com/" > .npmrc
-            - echo "//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}" >> .npmrc
+            #- echo "@dasred:registry=https://npm.pkg.github.com/" > .npmrc
+            #- echo "//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}" >> .npmrc
+            - npm set registry "https://npm.pkg.github.com/"
+            - npm set //npm.pkg.github.com/:_authToken $GITHUB_TOKEN
             - npm publish
 
     -   name:  rebuild cache
