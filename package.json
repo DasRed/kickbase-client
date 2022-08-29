@@ -15,8 +15,12 @@
         "src/*"
     ],
     "devDependencies": {
-        "semantic-release-cli": "^5.4.4",
-        "semantic-release": "^19.0.5"
+        "@semantic-release/commit-analyzer": "^9.0.2",
+        "@semantic-release/git": "^10.0.1",
+        "@semantic-release/github": "^8.0.6",
+        "@semantic-release/npm": "^9.0.1",
+        "semantic-release": "^19.0.5",
+        "semantic-release-cli": "^5.4.4"
     },
     "scripts": {
         "semantic-release": "semantic-release --ci"
