@@ -36,9 +36,11 @@ steps:
                 from_secret: GITHUB_TOKEN
         commands:
             - apk update && apk upgrade && apk add --no-cache git
-            - echo "@dasred:registry=https://npm.pkg.github.com/" > ~/.npmrc
-            - echo "//npm.pkg.github.com/:_authToken=\"$GITHUB_TOKEN\"" >> ~/.npmrc
+            - echo "@dasred:registry=https://npm.pkg.github.com/" > .npmrc
+            - echo "//npm.pkg.github.com/:_authToken=\"$GITHUB_TOKEN\"" >> .npmrc
             - npm set @dasred:registry https://npm.pkg.github.com
+            - ls -la .
+            - cat .npmrc
             - npm run semantic-release
 
     -   name:  rebuild cache
