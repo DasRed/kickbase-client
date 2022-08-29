@@ -27,7 +27,8 @@
         "semantic-release": "semantic-release --no-ci"
     },
     "publishConfig": {
-        "access": "restricted"
+        "access": "restricted",
+        "registry":"https://npm.pkg.github.com"
     },
     "release": {
         "branches": [
