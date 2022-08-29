@@ -1,0 +1,15 @@
+kind: pipeline
+type: docker
+name: default
+platform:
+  os: linux
+  arch: arm64
+
+steps:
+  - name: release
+    image: node:18-alpine
+    when:
+      branch:
+        - main
+    commands:
+      - npm run semantic-release
