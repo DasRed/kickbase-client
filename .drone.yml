@@ -34,8 +34,8 @@ steps:
             branch:
                 - main
         environment:
-            GT_TOKEN:
-                from_secret: GT_TOKEN
+            GH_TOKEN:
+                from_secret: GH_TOKEN
         commands:
             - apk update && apk upgrade && apk add --no-cache git
             - npm run semantic-release
@@ -43,9 +43,9 @@ steps:
     -   name:  rebuild cache
         image: meltwater/drone-cache
         settings:
-            pull:           true
-            backend:        "filesystem"
-            rebuild:        true
+            pull:    true
+            backend: "filesystem"
+            rebuild: true
             #cache_key:      "volume"
             #archive_format: "gzip"
             # filesystem_cache_root: "/tmp/cache"
@@ -54,7 +54,11 @@ steps:
         volumes:
             -   name: cache
                 path: /tmp/cache
-
+        when:
+            status:
+                - success
+                - failure
+                -
 volumes:
     -   name: cache
         host:
