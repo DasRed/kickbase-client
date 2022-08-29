@@ -9,7 +9,6 @@ steps:
     -   name:  restore cache
         image: meltwater/drone-cache
         settings:
-            pull:    true
             backend: "filesystem"
             restore: true
             mount:
@@ -25,9 +24,6 @@ steps:
 
     -   name:  release
         image: node:18-alpine
-        when:
-            branch:
-                - main
         environment:
             GITHUB_TOKEN:
                 from_secret: GITHUB_TOKEN
@@ -41,13 +37,21 @@ steps:
 #            - echo "always-auth=true" >> .npmrc
 #            - npm set @dasred:registry https://npm.pkg.github.com
 #            - npm publish --registry=https://npm.pkg.github.com/ --userconfig=/root/.npmrc
-            - npm adduser --registry=https://npm.pkg.github.com/
+            - npm run release
+
+    -   name:  publish
+        image: node:18-alpine
+        environment:
+            GITHUB_TOKEN:
+                from_secret: GITHUB_TOKEN
+        commands:
+            - echo "@dasred:registry=https://npm.pkg.github.com/" > .npmrc
+            - echo "//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}" >> .npmrc
             - npm publish
 
     -   name:  rebuild cache
         image: meltwater/drone-cache
         settings:
-            pull:    true
             backend: "filesystem"
             rebuild: true
             mount:
