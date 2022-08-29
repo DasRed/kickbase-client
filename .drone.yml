@@ -5,6 +5,15 @@ platform:
     os:   linux
     arch: arm64
 
+volumes:
+    -   name: cache
+        host:
+            path: /mnt/datahdd/drone/cache
+
+trigger:
+    event: [ push, pull_request ]
+    branch: [ main ]
+
 steps:
     -   name:  restore cache
         image: meltwater/drone-cache
@@ -17,6 +26,15 @@ steps:
             -   name: cache
                 path: /tmp/cache
 
+    -   name:  .npmrc
+        image: busybox
+        environment:
+            GITHUB_TOKEN:
+                from_secret: GITHUB_TOKEN
+        commands:
+            - echo "@dasred:registry=https://npm.pkg.github.com/" > .npmrc
+            - echo "//npm.pkg.github.com/:_authToken=$GITHUB_TOKEN" >> .npmrc
+
     -   name:  npm install
         image: node:18-alpine
         commands:
@@ -27,12 +45,10 @@ steps:
         environment:
             GITHUB_TOKEN:
                 from_secret: GITHUB_TOKEN
-#            NPM_TOKEN:
-#                from_secret: NPM_TOKEN
         commands:
             - apk update && apk upgrade && apk add --no-cache git
-            - npm set registry "https://npm.pkg.github.com/"
-            - npm set //npm.pkg.github.com/:_authToken $GITHUB_TOKEN
+#            - npm set registry "https://npm.pkg.github.com/"
+#            - npm set //npm.pkg.github.com/:_authToken $GITHUB_TOKEN
             - npm publish
 
     -   name:  rebuild cache
@@ -49,12 +65,3 @@ steps:
             status:
                 - success
                 - failure
-
-volumes:
-    -   name: cache
-        host:
-            path: /mnt/datahdd/drone/cache
-
-trigger:
-    event: [push, pull_request]
-    branch: [main]
