@@ -27,12 +27,10 @@ steps:
         environment:
             GITHUB_TOKEN:
                 from_secret: GITHUB_TOKEN
-            NPM_TOKEN:
-                from_secret: NPM_TOKEN
+#            NPM_TOKEN:
+#                from_secret: NPM_TOKEN
         commands:
             - apk update && apk upgrade && apk add --no-cache git
-            #- echo "@dasred:registry=https://npm.pkg.github.com/" > .npmrc
-            #- echo "//npm.pkg.github.com/:_authToken=${GITHUB_TOKEN}" >> .npmrc
             - npm set registry "https://npm.pkg.github.com/"
             - npm set //npm.pkg.github.com/:_authToken $GITHUB_TOKEN
             - npm publish
