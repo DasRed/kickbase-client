@@ -2,22 +2,27 @@ kind: pipeline
 type: docker
 name: default
 platform:
-  os: linux
-  arch: arm64
+    os:   linux
+    arch: arm64
 
 steps:
-  - name: npm install
-    image: node:18-alpine
-    when:
-      branch:
-        - main
-    commands:
-      - npm ci
-  - name: release
-    image: node:18-alpine
-    when:
-      branch:
-        - main
-    commands:
-        - apk update && apk upgrade && apk add --no-cache git
-        - npm run semantic-release
+    -   name:  npm install
+        image: node:18-alpine
+        when:
+            branch:
+                - main
+        commands:
+            - npm ci
+    -   name:  release
+        image: node:18-alpine
+        when:
+            branch:
+                - main
+        environment:
+            GT_TOKEN:
+                from_secret: GT_TOKEN
+            NPM_TOKEN:
+                from_secret: NPM_TOKEN
+        commands:
+            - apk update && apk upgrade && apk add --no-cache git
+            - npm run semantic-release
