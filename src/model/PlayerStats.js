@@ -30,8 +30,8 @@ export default class PlayerStats extends Model {
         this.marketValue  = marketValue;
         this.marketValues = marketValues;
 
-        this.buyDate  = moment(leaguePlayer.buyDate ?? 0);
-        this.buyPrice = leaguePlayer.buyPrice ?? 0;
+        this.buyDate  = moment(leaguePlayer?.buyDate ?? 0);
+        this.buyPrice = leaguePlayer?.buyPrice ?? 0;
     }
 
     /**
