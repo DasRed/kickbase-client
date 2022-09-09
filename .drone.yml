@@ -32,7 +32,7 @@ steps:
             GH_TOKEN:
                 from_secret: GH_TOKEN
             NPM_TOKEN:
-                from_secret: NPM_TOKEN
+                from_secret: GH_TOKEN
         commands:
             - apk update && apk upgrade && apk add git
             - npm i
