@@ -23,7 +23,6 @@
         "semantic-release-cli": "^5.4.4"
     },
     "scripts": {
-        "prepublishOnly": "npm run semantic-release",
         "semantic-release": "semantic-release"
     },
     "publishConfig": {
@@ -36,9 +35,6 @@
         ],
         "plugins": [
             "@semantic-release/commit-analyzer",
-            "@semantic-release/github"
-        ],
-        "prepare": [
             "@semantic-release/npm",
             {
                 "path": "@semantic-release/git",
@@ -46,7 +42,8 @@
                     "package.json",
                     "package-lock.json"
                 ]
-            }
+            },
+            "@semantic-release/github"
         ]
     }
 }
