@@ -1,7 +1,7 @@
 import LeagueUser from './LeagueUser.js';
 import MarketPlayer from './MarketPlayer.js';
 import Model from './Model.js';
-import Player from './Player.js';
+import TeamPlayer from './TeamPlayer.js';
 
 export default class League extends Model {
     /**
@@ -42,10 +42,10 @@ export default class League extends Model {
         return new LeagueUser(this.client, await this.client.get(`/leagues/${this.id}/me`));
     }
 
-    /** @returns {Promise<Player[]>} */
-    async getMyPlayers() {
+    /** @returns {Promise<TeamPlayer[]>} */
+    async getTeamPlayers() {
         const data = await this.client.get(`/leagues/${this.id}/users/${this.user.id}/players`);
 
-        return data.players.map((player) => new Player(this.client, this, player));
+        return data.players.map((player) => new TeamPlayer(this.client, this, player));
     }
 }
