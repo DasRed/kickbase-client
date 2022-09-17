@@ -39,4 +39,15 @@ export default class Offer extends Model {
         }
     }
 
+    /** @returns {Promise<boolean>} */
+    async remove() {
+        try {
+            await this.client.delete(`/leagues/${this.marketPlayer.league.id}/market/${this.marketPlayer.id}/offers/${this.id}`);
+            return true;
+        }
+        catch (error) {
+            console.error(error);
+            return false;
+        }
+    }
 }
