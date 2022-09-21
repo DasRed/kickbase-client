@@ -4,7 +4,7 @@ import Model from './Model.js';
 export default class Offer extends Model {
     /**
      *
-     * @param {Client} client
+     * @param {KickbaseManagerClient} client
      * @param {MarketPlayer} marketPlayer
      * @param {string} id
      * @param {number} price

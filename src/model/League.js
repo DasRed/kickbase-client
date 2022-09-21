@@ -1,9 +1,12 @@
+import Feed from './Feed.js';
 import LeagueUser from './LeagueUser.js';
 import MarketPlayer from './MarketPlayer.js';
 import Model from './Model.js';
 import TeamPlayer from './TeamPlayer.js';
 
 export default class League extends Model {
+    static FEED_SIZE = 30;
+
     /**
      *
      * @param {KickbaseManagerClient} client
@@ -28,6 +31,26 @@ export default class League extends Model {
         this.creatorId = creatorId;
         this.creation  = creation;
         this.values    = values;
+    }
+
+    /**
+     *
+     * @returns {Promise<Feed[]>}
+     */
+    async getFeeds() {
+        const promises = [];
+
+        for (let i = 0; i <= 300; i += 30) {
+            promises.push(this.client.get(`/leagues/${this.id}/feed?start=${i}`));
+        }
+
+        const responses = await Promise.all(promises);
+        return responses.reduce(
+            (result, {items: feeds}) => result.concat(
+                feeds.map((feed) => new Feed(this.client, this, feed))
+            ),
+            []
+        );
     }
 
     /** @returns {Promise<MarketPlayer[]>} */
