@@ -35,54 +35,67 @@ export default class Player extends Model {
      *
      * @param {KickbaseManagerClient} client
      * @param {League} league
-     * @param {string} id
-     * @param {string} teamId
-     * @param {string} teamName
-     * @param {string} userId
-     * @param {string} username
-     * @param {string} firstName
-     * @param {string} lastName
-     * @param {number} status
-     * @param {number} position
-     * @param {number} number
-     * @param {number} averagePoints
-     * @param {number} totalPoints
-     * @param {number} marketValue
-     * @param {number} marketValueTrend
-     * @param {number} dayStatus
-     * @param {number} [price = undefined]
      * @param {Object} values
      */
-    constructor(client, league, {id, teamId, teamName, userId, username, firstName, lastName, status, position, number, averagePoints, totalPoints, marketValue, marketValueTrend, dayStatus, price = undefined, ...values}) {
-        super(client, {id, teamId, teamName, userId, username, firstName, lastName, status, position, number, averagePoints, totalPoints, marketValue, marketValueTrend, dayStatus, price, ...values});
+    constructor(client, league, values) {
+        super(client, values);
 
         this.league = league;
-
-        this.id               = id;
-        this.teamId           = teamId;
-        this.teamName         = teamName;
-        this.userId           = userId;
-        this.username         = username;
-        this.firstName        = firstName;
-        this.lastName         = lastName;
-        this.status           = status;
-        this.position         = position;
-        this.number           = number;
-        this.averagePoints    = averagePoints;
-        this.totalPoints      = totalPoints;
-        this.marketValue      = marketValue;
-        this.marketValueTrend = marketValueTrend;
-        this.dayStatus        = dayStatus;
-        this.price            = price;
     }
 
     /** @returns {Promise<{}>} */
     async getStats() {
         if (this.#stats === undefined) {
             const data  = await this.client.get(`/leagues/${this.league.id}/players/${this.id}/stats`);
-            this.#stats = new PlayerStats(this.client, this, data);
+            this.#stats = new PlayerStats(this.client, data);
         }
 
         return this.#stats;
+    }
+
+    /**
+     *
+     * @param {Object} values
+     * @param {string} values.id
+     * @param {string} values.teamId
+     * @param {string} values.teamName
+     * @param {string} values.userId
+     * @param {string} values.username
+     * @param {string} values.firstName
+     * @param {string} values.lastName
+     * @param {number} values.status
+     * @param {number} values.position
+     * @param {number} values.number
+     * @param {number} values.averagePoints
+     * @param {number} values.totalPoints
+     * @param {number} values.marketValue
+     * @param {number} values.marketValueTrend
+     * @param {number} values.dayStatus
+     * @param {number} [values.price = undefined]
+     * @returns {Player}
+     */
+    update(values) {
+        super.update(values);
+
+        this.id               = this.values.id;
+        this.teamId           = this.values.teamId;
+        this.teamName         = this.values.teamName;
+        this.userId           = this.values.userId;
+        this.username         = this.values.username;
+        this.firstName        = this.values.firstName;
+        this.lastName         = this.values.lastName;
+        this.status           = this.values.status;
+        this.position         = this.values.position;
+        this.number           = this.values.number;
+        this.averagePoints    = this.values.averagePoints;
+        this.totalPoints      = this.values.totalPoints;
+        this.marketValue      = this.values.marketValue;
+        this.marketValueTrend = this.values.marketValueTrend;
+        this.dayStatus        = this.values.dayStatus;
+        this.price            = this.values.price;
+
+        this.#stats = undefined;
+
+        return this;
     }
 }

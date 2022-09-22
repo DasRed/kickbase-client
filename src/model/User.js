@@ -3,29 +3,31 @@ import Model from './Model.js';
 export default class User extends Model {
     /**
      *
-     * @param {KickbaseManagerClient} client
-     * @param {string} email
-     * @param {string} cover
-     * @param {number} flags
-     * @param {string} vemail
-     * @param {boolean} enableBeta
-     * @param {*[]} perms
-     * @param {string} id
-     * @param {string} name
-     * @param {string} profile
      * @param {Object} values
+     * @param {string} values.email
+     * @param {string} values.cover
+     * @param {number} values.flags
+     * @param {string} values.vemail
+     * @param {boolean} values.enableBeta
+     * @param {*[]} values.perms
+     * @param {string} values.id
+     * @param {string} values.name
+     * @param {string} values.profile
+     * @returns {this}
      */
-    constructor(client, {email, cover, flags, vemail, enableBeta, perms, id, name, profile, ...values}) {
-        super(client, {email, cover, flags, vemail, enableBeta, perms, id, name, profile, ...values});
+    update(values) {
+        super.update(values);
 
-        this.email      = email;
-        this.cover      = cover;
-        this.flags      = flags;
-        this.vemail     = vemail;
-        this.enableBeta = enableBeta;
-        this.perms      = perms;
-        this.id         = id;
-        this.name       = name;
-        this.profile    = profile;
+        this.email      = this.values.email;
+        this.cover      = this.values.cover;
+        this.flags      = this.values.flags;
+        this.vemail     = this.values.vemail;
+        this.enableBeta = this.values.enableBeta;
+        this.perms      = this.values.perms;
+        this.id         = this.values.id;
+        this.name       = this.values.name;
+        this.profile    = this.values.profile;
+
+        return this;
     }
 }

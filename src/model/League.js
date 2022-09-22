@@ -11,26 +11,12 @@ export default class League extends Model {
      *
      * @param {KickbaseManagerClient} client
      * @param {User} user
-     * @param {string} id
-     * @param {string} cpi
-     * @param {string} name
-     * @param {string} creator
-     * @param {string} creatorId
-     * @param {string} creation
      * @param {object} values
      */
-    constructor(client, user, {id, cpi, name, creator, creatorId, creation, ...values}) {
-        super(client, {id, cpi, name, creator, creatorId, creation, ...values});
+    constructor(client, user, values) {
+        super(client, values);
 
         this.user = user;
-
-        this.id        = id;
-        this.cpi       = cpi;
-        this.name      = name;
-        this.creator   = creator;
-        this.creatorId = creatorId;
-        this.creation  = creation;
-        this.values    = values;
     }
 
     /**
@@ -47,7 +33,7 @@ export default class League extends Model {
         const responses = await Promise.all(promises);
         return responses.reduce(
             (result, {items: feeds}) => result.concat(
-                feeds.map((feed) => new Feed(this.client, this, feed))
+                feeds.map((feed) => new Feed(this.client, feed))
             ),
             []
         );
@@ -70,5 +56,29 @@ export default class League extends Model {
         const data = await this.client.get(`/leagues/${this.id}/users/${this.user.id}/players`);
 
         return data.players.map((player) => new TeamPlayer(this.client, this, player));
+    }
+
+    /**
+     *
+     * @param {Object} values
+     * @param {string} values.id
+     * @param {string} values.cpi
+     * @param {string} values.name
+     * @param {string} values.creator
+     * @param {string} values.creatorId
+     * @param {string} values.creation
+     * @returns {League}
+     */
+    update(values) {
+        super.update(values);
+
+        this.id        = this.values.id;
+        this.cpi       = this.values.cpi;
+        this.name      = this.values.name;
+        this.creator   = this.values.creator;
+        this.creatorId = this.values.creatorId;
+        this.creation  = this.values.creation;
+
+        return this;
     }
 }

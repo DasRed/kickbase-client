@@ -2,36 +2,15 @@ import moment from 'moment';
 import Model from './Model.js';
 
 export default class PlayerStats extends Model {
+    #marketValueAtBuyDate;
+
     /** @returns {number} */
     get marketValueAtBuyDate() {
-        if (this._marketValueAtBuyDate === undefined) {
-            this._marketValueAtBuyDate = this.marketValues.find(({d: date}) => this.buyDate.isSame(date, 'day'))?.m;
+        if (this.#marketValueAtBuyDate === undefined) {
+            this.#marketValueAtBuyDate = this.marketValues.find(({d: date}) => this.buyDate.isSame(date, 'day'))?.m;
         }
 
-        return this._marketValueAtBuyDate || this.buyPrice;
-    }
-
-    /**
-     *
-     * @param {KickbaseManagerClient} client
-     * @param {Player} player
-     * @param {number} marketValue
-     * @param {Object[]} marketValues
-     * @param {string} marketValues.d
-     * @param {number} marketValues.m
-     * @param {Object} leaguePlayer
-     * @param {string|moment} leaguePlayer.buyDate
-     * @param {number} leaguePlayer.buyPrice
-     * @param {Object} values
-     */
-    constructor(client, player, {marketValue, marketValues, leaguePlayer, ...values}) {
-        super(client, {marketValue, marketValues, leaguePlayer, ...values});
-
-        this.marketValue  = marketValue;
-        this.marketValues = marketValues;
-
-        this.buyDate  = moment(leaguePlayer?.buyDate ?? 0);
-        this.buyPrice = leaguePlayer?.buyPrice ?? 0;
+        return this.#marketValueAtBuyDate || this.buyPrice;
     }
 
     /**
@@ -59,5 +38,31 @@ export default class PlayerStats extends Model {
         }, {numerator: 0, denominator: 0});
 
         return Math.atan(numerator / denominator) * 180 / Math.PI / 90;
+    }
+
+    /**
+     *
+     * @param {Object} values
+     * @param {number} values.marketValue
+     * @param {Object[]} values.marketValues
+     * @param {string} values.marketValues.d
+     * @param {number} values.marketValues.m
+     * @param {Object} values.leaguePlayer
+     * @param {string|moment} values.leaguePlayer.buyDate
+     * @param {number} values.leaguePlayer.buyPrice
+     * @returns {PlayerStats}
+     */
+    update(values) {
+        super.update(values);
+
+        this.marketValue  = this.values.marketValue;
+        this.marketValues = this.values.marketValues;
+
+        this.buyDate  = moment(this.values.leaguePlayer?.buyDate ?? 0);
+        this.buyPrice = this.values.leaguePlayer?.buyPrice ?? 0;
+
+        this.#marketValueAtBuyDate = undefined;
+
+        return this;
     }
 }

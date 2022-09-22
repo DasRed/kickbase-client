@@ -1,20 +1,6 @@
 import Player, {DAY_STATUS} from './Player.js';
 
 export default class TeamPlayer extends Player {
-
-    /**
-     *
-     * @param {KickbaseManagerClient} client
-     * @param {League} league
-     * @param {Object} data
-     */
-    constructor(client, league, data) {
-        super(client, league, data);
-
-        this.isInSell = this.price !== undefined;
-        this.isLineUp = this.dayStatus === DAY_STATUS.LINE_UP;
-    }
-
     /**
      * @param {number} price
      * @returns {Promise<boolean>}
@@ -40,5 +26,19 @@ export default class TeamPlayer extends Player {
             console.error(error);
             return false;
         }
+    }
+
+    /**
+     *
+     * @param {Object} values
+     * @returns {TeamPlayer}
+     */
+    update(values) {
+        super.update(values);
+
+        this.isInSell = this.price !== undefined;
+        this.isLineUp = this.dayStatus === DAY_STATUS.LINE_UP;
+
+        return this;
     }
 }

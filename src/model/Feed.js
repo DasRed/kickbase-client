@@ -10,37 +10,38 @@ export const TYPE = {
 export default class Feed extends Model {
     /**
      *
-     * @param {KickbaseManagerClient} client
-     * @param {League} league
-     * @param {string} id
-     * @param {string} date
-     * @param {number} type
-     * @param {object} meta
-     * @param {string} [meta.sid] seller id. only with type SELL
-     * @param {string} [meta.sn] seller name. only with type SELL
-     * @param {string} [meta.bid] buyer id. only with type BUY
-     * @param {string} [meta.bn] buyer name. only with type BUY
-     * @param {string} meta.pid player id
-     * @param {string} meta.pfn player first name
-     * @param {string} meta.pln player last name
-     * @param {number} [meta.p] buy or sell price. only with type SELL or BUY
      * @param {Object} values
+     * @param {string} values.id
+     * @param {string} values.date
+     * @param {number} values.type
+     * @param {object} values.meta
+     * @param {string} [values.meta.sid] seller id. only with type SELL
+     * @param {string} [values.meta.sn] seller name. only with type SELL
+     * @param {string} [values.meta.bid] buyer id. only with type BUY
+     * @param {string} [values.meta.bn] buyer name. only with type BUY
+     * @param {string} values.meta.pid player id
+     * @param {string} values.meta.pfn player first name
+     * @param {string} values.meta.pln player last name
+     * @param {number} [values.meta.p] buy or sell price. only with type SELL or BUY
+     * @returns {Feed}
      */
-    constructor(client, league, {id, date, type, meta, ...values}) {
-        super(client, {id, date, type, meta, ...values});
+    update(values) {
+        super.update(values);
 
-        this.league = league;
-        this.id     = id;
-        this.date   = moment(date);
-        this.type   = type;
+        this.league = this.values.league;
+        this.id     = this.values.id;
+        this.date   = moment(this.values.date);
+        this.type   = this.values.type;
 
-        this.userId   = meta.bid ?? meta.sid;
-        this.userName = meta.bn ?? meta.sn;
+        this.userId   = this.values.meta.bid ?? this.values.meta.sid;
+        this.userName = this.values.meta.bn ?? this.values.meta.sn;
 
-        this.playerId        = meta.pid;
-        this.playerFirstName = meta.pfn;
-        this.playerLastName  = meta.pln;
+        this.playerId        = this.values.meta.pid;
+        this.playerFirstName = this.values.meta.pfn;
+        this.playerLastName  = this.values.meta.pln;
 
-        this.price = meta.p;
+        this.price = this.values.meta.p;
+
+        return this;
     }
 }

@@ -6,11 +6,23 @@ export default class Model {
      */
     constructor(client, values = {}) {
         this.client = client;
-        this.values = values;
+
+        this.update(values);
     }
 
     /** @returns {Object} */
     toJSON() {
         return this.values;
+    }
+
+    /**
+     *
+     * @param {Object} [values = {}]
+     * @returns {this}
+     */
+    update(values) {
+        this.values = values;
+
+        return this;
     }
 }
