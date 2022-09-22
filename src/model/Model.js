@@ -7,7 +7,7 @@ export default class Model {
     constructor(client, values = {}) {
         this.client = client;
 
-        this.update(values);
+        this.update(values, true);
     }
 
     /** @returns {Object} */
@@ -17,10 +17,11 @@ export default class Model {
 
     /**
      *
-     * @param {Object} [values = {}]
+     * @param {Object} values
+     * @param {boolean} [init = false]
      * @returns {this}
      */
-    update(values) {
+    update(values, init = false) {
         this.values = values;
 
         return this;

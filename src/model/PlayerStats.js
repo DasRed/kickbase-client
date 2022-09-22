@@ -50,10 +50,11 @@ export default class PlayerStats extends Model {
      * @param {Object} values.leaguePlayer
      * @param {string|moment} values.leaguePlayer.buyDate
      * @param {number} values.leaguePlayer.buyPrice
+     * @param {boolean} [init = false]
      * @returns {PlayerStats}
      */
-    update(values) {
-        super.update(values);
+    update(values, init = false) {
+        super.update(values, init);
 
         this.marketValue  = this.values.marketValue;
         this.marketValues = this.values.marketValues;
@@ -61,7 +62,9 @@ export default class PlayerStats extends Model {
         this.buyDate  = moment(this.values.leaguePlayer?.buyDate ?? 0);
         this.buyPrice = this.values.leaguePlayer?.buyPrice ?? 0;
 
-        this.#marketValueAtBuyDate = undefined;
+        if (init === false) {
+            this.#marketValueAtBuyDate = undefined;
+        }
 
         return this;
     }

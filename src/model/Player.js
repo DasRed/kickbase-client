@@ -72,10 +72,11 @@ export default class Player extends Model {
      * @param {number} values.marketValueTrend
      * @param {number} values.dayStatus
      * @param {number} [values.price = undefined]
+     * @param {boolean} [init = false]
      * @returns {Player}
      */
-    update(values) {
-        super.update(values);
+    update(values, init = false) {
+        super.update(values, init);
 
         this.id               = this.values.id;
         this.teamId           = this.values.teamId;
@@ -94,7 +95,9 @@ export default class Player extends Model {
         this.dayStatus        = this.values.dayStatus;
         this.price            = this.values.price;
 
-        this.#stats = undefined;
+        if (init === false) {
+            this.#stats = undefined;
+        }
 
         return this;
     }

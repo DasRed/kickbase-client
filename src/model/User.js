@@ -13,10 +13,11 @@ export default class User extends Model {
      * @param {string} values.id
      * @param {string} values.name
      * @param {string} values.profile
+     * @param {boolean} [init = false]
      * @returns {this}
      */
-    update(values) {
-        super.update(values);
+    update(values, init = false) {
+        super.update(values, init);
 
         this.email      = this.values.email;
         this.cover      = this.values.cover;

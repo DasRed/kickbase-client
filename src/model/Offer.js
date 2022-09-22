@@ -47,10 +47,11 @@ export default class Offer extends Model {
      * @param {string|moment} values.validUntilDate
      * @param {string|undefined} values.userId
      * @param {string|undefined} values.userName
+     * @param {boolean} [init = false]
      * @returns {Offer}
      */
-    update(values) {
-        super.update(values);
+    update(values, init = false) {
+        super.update(values, init);
 
         this.id             = this.values.id;
         this.price          = this.values.price;

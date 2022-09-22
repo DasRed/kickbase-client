@@ -36,10 +36,11 @@ export default class MarketPlayer extends Player {
      * @param {string|moment} values.date
      * @param {number} values.expiry
      * @param {Object[]} values.offers
+     * @param {boolean} [init = false]
      * @returns {MarketPlayer}
      */
-    update(values) {
-        super.update(values);
+    update(values, init = false) {
+        super.update(values, init);
 
         this.price  = this.values.price;
         this.date   = moment(this.values.date);

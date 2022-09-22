@@ -67,10 +67,11 @@ export default class League extends Model {
      * @param {string} values.creator
      * @param {string} values.creatorId
      * @param {string} values.creation
+     * @param {boolean} [init = false]
      * @returns {League}
      */
-    update(values) {
-        super.update(values);
+    update(values, init = false) {
+        super.update(values, init);
 
         this.id        = this.values.id;
         this.cpi       = this.values.cpi;

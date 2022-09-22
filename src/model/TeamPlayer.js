@@ -31,10 +31,11 @@ export default class TeamPlayer extends Player {
     /**
      *
      * @param {Object} values
+     * @param {boolean} [init = false]
      * @returns {TeamPlayer}
      */
-    update(values) {
-        super.update(values);
+    update(values, init = false) {
+        super.update(values, init);
 
         this.isInSell = this.price !== undefined;
         this.isLineUp = this.dayStatus === DAY_STATUS.LINE_UP;

@@ -23,10 +23,11 @@ export default class Feed extends Model {
      * @param {string} values.meta.pfn player first name
      * @param {string} values.meta.pln player last name
      * @param {number} [values.meta.p] buy or sell price. only with type SELL or BUY
+     * @param {boolean} [init = false]
      * @returns {Feed}
      */
-    update(values) {
-        super.update(values);
+    update(values, init = false) {
+        super.update(values, init);
 
         this.league = this.values.league;
         this.id     = this.values.id;
