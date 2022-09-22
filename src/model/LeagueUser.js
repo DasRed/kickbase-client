@@ -9,7 +9,7 @@ export default class LeagueUser extends Model {
      * @param {Object} values
      */
     constructor(client, {budget, teamValue, ...values}) {
-        super(client, values);
+        super(client, {budget, teamValue, ...values});
 
         this.budget    = budget;
         this.teamValue = teamValue;

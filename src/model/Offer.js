@@ -15,7 +15,7 @@ export default class Offer extends Model {
      * @param {Object} values
      */
     constructor(client, marketPlayer, {id, price, date, validUntilDate, userId, userName, ...values}) {
-        super(client, values);
+        super(client, {id, price, date, validUntilDate, userId, userName, ...values});
 
         this.marketPlayer = marketPlayer;
 

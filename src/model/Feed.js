@@ -27,7 +27,7 @@ export default class Feed extends Model {
      * @param {Object} values
      */
     constructor(client, league, {id, date, type, meta, ...values}) {
-        super(client, values);
+        super(client, {id, date, type, meta, ...values});
 
         this.league = league;
         this.id     = id;

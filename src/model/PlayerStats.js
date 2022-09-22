@@ -25,7 +25,7 @@ export default class PlayerStats extends Model {
      * @param {Object} values
      */
     constructor(client, player, {marketValue, marketValues, leaguePlayer, ...values}) {
-        super(client, values);
+        super(client, {marketValue, marketValues, leaguePlayer, ...values});
 
         this.marketValue  = marketValue;
         this.marketValues = marketValues;

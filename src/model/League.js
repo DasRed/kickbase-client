@@ -20,7 +20,7 @@ export default class League extends Model {
      * @param {object} values
      */
     constructor(client, user, {id, cpi, name, creator, creatorId, creation, ...values}) {
-        super(client, values);
+        super(client, {id, cpi, name, creator, creatorId, creation, ...values});
 
         this.user = user;
 

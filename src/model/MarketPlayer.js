@@ -14,7 +14,7 @@ export default class MarketPlayer extends Player {
      * @param {Object} values
      */
     constructor(client, league, {price, date, expiry, offers, ...values}) {
-        super(client, league, values);
+        super(client, league, {price, date, expiry, offers, ...values});
 
         this.price  = price;
         this.date   = moment(date);

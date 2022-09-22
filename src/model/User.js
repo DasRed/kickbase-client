@@ -16,16 +16,16 @@ export default class User extends Model {
      * @param {Object} values
      */
     constructor(client, {email, cover, flags, vemail, enableBeta, perms, id, name, profile, ...values}) {
-        super(client, values);
+        super(client, {email, cover, flags, vemail, enableBeta, perms, id, name, profile, ...values});
 
-        this.email       = email;
-        this.cover       = cover;
-        this.flags       = flags;
-        this.vemail      = vemail;
+        this.email      = email;
+        this.cover      = cover;
+        this.flags      = flags;
+        this.vemail     = vemail;
         this.enableBeta = enableBeta;
-        this.perms       = perms;
-        this.id          = id;
-        this.name        = name;
-        this.profile     = profile;
+        this.perms      = perms;
+        this.id         = id;
+        this.name       = name;
+        this.profile    = profile;
     }
 }
