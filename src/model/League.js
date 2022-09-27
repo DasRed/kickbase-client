@@ -2,6 +2,7 @@ import Feed from './Feed.js';
 import LeagueUser from './LeagueUser.js';
 import MarketPlayer from './MarketPlayer.js';
 import Model from './Model.js';
+import Player from './Player.js';
 import TeamPlayer from './TeamPlayer.js';
 
 export default class League extends Model {
@@ -49,6 +50,17 @@ export default class League extends Model {
     /** @returns {Promise<LeagueUser>} */
     async getMe() {
         return new LeagueUser(this.client, await this.client.get(`/leagues/${this.id}/me`));
+    }
+
+    /**
+     *
+     * @param {string} id
+     * @returns {Promise<Player>}
+     */
+    async getPlayer(id) {
+        const data = await this.client.get(`/leagues/${this.id}/players/${id}`);
+
+        return new Player(this.client, this, data);
     }
 
     /** @returns {Promise<TeamPlayer[]>} */
