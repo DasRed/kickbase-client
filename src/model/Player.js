@@ -53,7 +53,7 @@ export default class Player extends Model {
     async getPoints() {
         if (this.#points === undefined) {
             const data   = await this.client.get(`/players/${this.id}/points`);
-            this.#points = data.map((entry) => new PlayerPoint(this.client, entry));
+            this.#points = data.s.map((entry) => new PlayerPoint(this.client, entry));
         }
 
         return this.#points;
