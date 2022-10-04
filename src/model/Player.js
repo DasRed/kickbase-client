@@ -1,4 +1,5 @@
 import Model from './Model.js';
+import PlayerPoint from './PlayerPoint.js';
 import PlayerStats from './PlayerStats.js';
 
 export const DAY_STATUS = {
@@ -28,6 +29,8 @@ export const POSITION = {
 };
 
 export default class Player extends Model {
+    /** @type {PlayerPoint[]} */
+    #points;
     /** @type {PlayerStats} */
     #stats;
 
@@ -43,7 +46,31 @@ export default class Player extends Model {
         this.league = league;
     }
 
-    /** @returns {Promise<{}>} */
+    /**
+     *
+     * @returns {Promise<PlayerPoint[]>}
+     */
+    async getPoints() {
+        if (this.#points === undefined) {
+            const data   = await this.client.get(`/players/${this.id}/points`);
+            this.#points = data.map((entry) => new PlayerPoint(this.client, entry));
+        }
+
+        return this.#points;
+    }
+
+    /**
+     *
+     * @returns {Promise<PlayerPoint>}
+     */
+    async getPointsForCurrentSeason() {
+        const points = await this.getPoints();
+        const year   = (new Date()).getFullYear();
+
+        return points.find((point) => point.season === `${year}/${year + 1}`)
+    }
+
+    /** @returns {Promise<PlayerStats>} */
     async getStats() {
         if (this.#stats === undefined) {
             const data  = await this.client.get(`/leagues/${this.league.id}/players/${this.id}/stats`);
