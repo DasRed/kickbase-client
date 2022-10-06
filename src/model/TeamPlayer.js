@@ -42,4 +42,19 @@ export default class TeamPlayer extends Player {
 
         return this;
     }
+
+    /**
+     * @param {number} price
+     * @returns {Promise<boolean>}
+     */
+    async updateMarketPrice(price) {
+        try {
+            await this.client.put(`/leagues/${this.league.id}/market/${this.id}`, {price});
+            return true;
+        }
+        catch (error) {
+            console.error(error);
+            return false;
+        }
+    }
 }
