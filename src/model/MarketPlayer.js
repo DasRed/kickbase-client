@@ -4,13 +4,18 @@ import Player from './Player.js';
 
 export default class MarketPlayer extends Player {
     /** @returns {Offer} */
-    getHighestOffer() {
-        return this.offers.reduce((acc, offer) => acc === undefined || acc.price < offer.price ? offer : acc, undefined);
+    getMyOffer() {
+        return this.offers.find((offer) => offer.userId === this.client.getUser().id);
     }
 
     /** @returns {Offer} */
-    getMyOffer() {
-        return this.offers.find((offer) => offer.userId === this.client.getUser().id);
+    getOfferFromKickbase() {
+        return this.offers.find((offer) => offer.userId === undefined);
+    }
+
+    /** @returns {Offer[]} */
+    getOffersFromUser() {
+        return this.offers.filter((offer) => offer.userId !== undefined && offer.userId === this.client.getUser().id);
     }
 
     /**
@@ -45,6 +50,8 @@ export default class MarketPlayer extends Player {
         this.price  = this.values.price;
         this.date   = moment(this.values.date);
         this.expiry = this.values.expiry;
+
+        /** @type {Offer[]} */
         this.offers = this.values.offers?.map((offer) => new Offer(this.client, this, offer)) ?? [];
 
         return this;
