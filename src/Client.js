@@ -1,3 +1,4 @@
+import EventEmitter from 'eventemitter0';
 import moment from 'moment';
 import fetch from 'node-fetch';
 import League from './model/League.js';
@@ -6,7 +7,7 @@ import User from './model/User.js';
 /**
  * @alias KickbaseManagerClient
  */
-export default class Client {
+export default class Client extends EventEmitter {
     /** @type {League[]} */
     #leagues = [];
     /** @type {string} */
@@ -29,6 +30,7 @@ export default class Client {
      * @param {string} [host = https://api.kickbase.com]
      */
     constructor({email, password, defaultLeagueId = undefined, host = 'https://api.kickbase.com'}) {
+        super({});
         this.host            = host.endsWith('/') ? host.slice(0, -1) : host;
         this.email           = email;
         this.password        = password;
@@ -93,11 +95,14 @@ export default class Client {
             options.body                    = JSON.stringify(data);
         }
 
-        const response = await fetch(this.host + (url.startsWith('/') ? url : `/${url}`), options);
+        const fetchParams = {
+            url: this.host + (url.startsWith('/') ? url : `/${url}`),
+            options,
+        };
 
-        if (response.ok === false) {
-            throw new Error(response.status + ' ' + response.statusText + await response.text());
-        }
+        await this.emit('fetch.before', fetchParams);
+        const response = await fetch(fetchParams.url, fetchParams.options);
+        await this.emit('fetch.after', fetchParams, response);
 
         return await response.json();
     }
