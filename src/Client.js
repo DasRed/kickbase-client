@@ -1,8 +1,8 @@
-import EventEmitter from 'eventemitter0';
 import moment from 'moment';
 import fetch from 'node-fetch';
 import League from './model/League.js';
 import User from './model/User.js';
+import EventEmitter from 'eventemitter0';
 
 /**
  * @alias KickbaseManagerClient
@@ -103,6 +103,10 @@ export default class Client extends EventEmitter {
         await this.emit('fetch.before', fetchParams);
         const response = await fetch(fetchParams.url, fetchParams.options);
         await this.emit('fetch.after', fetchParams, response);
+
+        if (response.ok === false) {
+            throw new Error(response.status + ' ' + response.statusText + await response.text());
+        }
 
         return await response.json();
     }

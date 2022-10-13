@@ -28,7 +28,7 @@ export default class League extends Model {
     async getFeeds() {
         const promises = [];
 
-        for (let i = 0; i <= 300; i += 30) {
+        for (let i = 0; i <= League.FEED_SIZE; i += 30) {
             promises.push(this.client.get(`/leagues/${this.id}/feed?start=${i}`));
         }
 

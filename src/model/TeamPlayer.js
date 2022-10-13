@@ -1,4 +1,5 @@
-import Player, {DAY_STATUS} from './Player.js';
+import {PLAYER_DAY_STATUS} from '../const.js';
+import Player from './Player.js';
 
 export default class TeamPlayer extends Player {
     /**
@@ -38,7 +39,7 @@ export default class TeamPlayer extends Player {
         super.update(values, init);
 
         this.isInSell = this.price !== undefined;
-        this.isLineUp = this.dayStatus === DAY_STATUS.LINE_UP;
+        this.isLineUp = this.dayStatus === PLAYER_DAY_STATUS.LINE_UP;
 
         return this;
     }
