@@ -1,4 +1,3 @@
-
 export const PLAYER_DAY_STATUS = {
     NOT_LINE_UP: 0,
     LINE_UP:     1,
@@ -16,7 +15,8 @@ export const PLAYER_STATUS = {
     STRUCK:            2, // angeschlagen
     UNKNOWN_3:         3, // ???
     ADVANCED_TRAINING: 4, // Aufbautraining
-    YELLOW_CARD: 32
+    YELLOW_CARD:       32,
+    NOT_IN_THE_SQUAD:  64, // nicht im Kader
 };
 
 export const PLAYER_POSITION = {
