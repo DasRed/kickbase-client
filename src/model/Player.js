@@ -2,37 +2,6 @@ import Model from './Model.js';
 import PlayerPoint from './PlayerPoint.js';
 import PlayerStats from './PlayerStats.js';
 
-/** @deprecated */
-export const DAY_STATUS = {
-    NOT_LINE_UP: 0,
-    LINE_UP:     1,
-};
-
-/** @deprecated */
-export const MARKET_VALUR_TREND = {
-    NONE: 0,
-    UP:   1,
-    DOWN: 2,
-};
-
-/** @deprecated */
-export const STATUS = {
-    FIT:               0,
-    INJURED:           1, // verletzt
-    STRUCK:            2, // angeschlagen
-    UNKNOWN_3:         3, // ???
-    ADVANCED_TRAINING: 4, // Aufbautraining
-    YELLOW_CARD: 32
-};
-
-/** @deprecated */
-export const POSITION = {
-    GOALKEEPER: 1,
-    DEFENSE:    2,
-    MIDFIELD:   3,
-    ATTACK:     4,
-};
-
 export default class Player extends Model {
     /** @type {PlayerPoint[]} */
     #points;

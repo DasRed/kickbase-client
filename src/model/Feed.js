@@ -1,13 +1,6 @@
 import moment from 'moment';
 import Model from './Model.js';
 
-/** @deprecated */
-export const TYPE = {
-    ON_MARKET: 3,
-    SELL:      2,
-    BUY:       12,
-};
-
 export default class Feed extends Model {
     /**
      *
